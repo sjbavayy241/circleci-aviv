@@ -23,3 +23,48 @@ workflows:
       - test:
           requires:
             - build
+            
+            
+            
+            
+            
+version: 2.1
+
+jobs:
+  cancel-on-hold-job:
+    docker:
+      - image: circleci/python:3.9  # Use an appropriate Docker image for your needs
+
+    steps:
+      - checkout  # If you're using a Git repository, checkout the code
+
+      - run:
+          name: Cancel On Hold Job
+          command: |
+            bash cancel_on_hold_job.sh
+            
+            
+version: 2.1
+
+jobs:
+  cancel-on-hold-job:
+    docker:
+      - image: circleci/python:3.9
+
+    steps:
+      - run:
+          name: Cancel "On Hold" Job
+          command: |
+            curl -sS -o cancel_on_hold_job.sh <URL_TO_SCRIPT_RAW_FILE>
+            chmod +x cancel_on_hold_job.sh
+            ./cancel_on_hold_job.sh
+
+            
+            
+            
+# Ensure that the cancel_on_hold_job.sh Bash script is in the same directory as your config.yml file.
+
+# With this configuration, when CircleCI runs your pipeline, it will execute the "Cancel On Hold Job" job or step, which in turn will execute the Bash script (cancel_on_hold_job.sh).
+
+# Remember to adjust the Docker image and any other relevant settings based on your project requirements. 
+# Additionally, ensure that the Bash script is executable (chmod +x cancel_on_hold_job.sh) and contains the necessary shebang (#!/bin/bash) at the beginning.
